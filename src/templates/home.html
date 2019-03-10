@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Your user is</h1>
+{{ request.user }}
+{{ request.user.is.authenticated }}
+<form>
+  <textarea rows="4" cols="50" placeholder="Please enter the text you'd wish to paste..."></textarea>
+  <input type="submit">
+{% endblock content %}
