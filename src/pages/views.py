@@ -17,3 +17,6 @@ def about_view(request, *args, **kwargs):
         "my_list": [123, 4342, 1252]
     }
     return render(request, "about.html", my_context)
+
+def login_view(request, *args, **kwargs):
+    return render(request, "login.html", {})
