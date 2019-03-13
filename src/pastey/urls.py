@@ -14,18 +14,27 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
-
+from django.urls import include, path
+from django.conf.urls import *
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import UpdateView
+from django.views.generic.edit import CreateView
+from pastes.models import Paste
 from django.conf.urls import url
-from core import views as core_views
-from pages.views import home_view, contact_view, about_view
+from pastes import views
+from pages.views import home_view, contact_view, about_view#, SampleView
+
+display_info = {'queryset': Paste.objects.all()}
+create_info = {'model': Paste}
 
 urlpatterns = [
     path('home/', home_view, name='home'),
     path('contact/', contact_view, name='contact'),
     path('admin/', admin.site.urls, name='admin'),
     path('about/', about_view, name='about'),
-    url(r'^signup/$', core_views.signup, name='signup'),
+    url(r'^signup/$', views.signup, name='signup'),
     url(r'^$', home_view),
+
     path('accounts/', include('django.contrib.auth.urls')),
 ]

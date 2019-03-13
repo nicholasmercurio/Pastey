@@ -41,10 +41,8 @@ INSTALLED_APPS = [
     #Third Party
 
     #Own
-    'products',
     'pages',
-    'users',
-    'core',
+    'pastes',
 ]
 
 MIDDLEWARE = [
