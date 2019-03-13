@@ -1,9 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Your user is</h1>
-{{ request.user }}
-{{ request.user.is.authenticated }}
+<h1>Your user is {{ request.user }}</h1>
 <form action="" method="POST">
   {% csrf_token %}
   {{ form2.as_p }}<br>

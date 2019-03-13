@@ -1,12 +1,16 @@
 {% extends "base.html" %}
 
-{% include "navbar.html" %}
+<!-- this looks like shit -->
 
 {% block content %}
-  <h2>Recently Pasted...</h2>
+  <h2>Recently Pasted for {{ request.user }}</h2>
   <ul>
-    {% for object in object_list %}
-    <li><a href="{{ object.get_absolute_url }}">{{ object }}</a></li>
+    {% for x in userposts %}
+    <li>Title: {{ x.title }}</li>
+    <li>Poster name: {{ x.poster }}</li>
+    <li>Timestamp: {{ x.timestamp }}</li>
+    <li>Content: {{ x.content }}</li>
+    <br><br>
     {% endfor %}
   </ul>
 {% endblock %}

@@ -23,7 +23,7 @@ from django.views.generic.edit import CreateView
 from pastes.models import Paste
 from django.conf.urls import url
 from pastes import views
-from pages.views import home_view, contact_view, about_view#, SampleView
+from pages.views import home_view, contact_view, about_view, paste_list_view
 
 display_info = {'queryset': Paste.objects.all()}
 create_info = {'model': Paste}
@@ -34,6 +34,7 @@ urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
     path('about/', about_view, name='about'),
     url(r'^signup/$', views.signup, name='signup'),
+    path('paste_list/', paste_list_view, name='paste_list'),
     url(r'^$', home_view),
 
     path('accounts/', include('django.contrib.auth.urls')),

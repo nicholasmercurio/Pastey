@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from .forms import PostForm
+from pastes.models import Paste
 # Create your views here.
 def home_view(request, *args, **kwargs):
     print(args, kwargs)
@@ -31,3 +32,10 @@ def about_view(request, *args, **kwargs):
 
 def login_view(request, *args, **kwargs):
     return render(request, "login.html", {})
+
+def paste_list_view(request, *args, **kwargs):
+    userposts = Paste.objects.filter(poster=request.user.id)
+
+    if request.user.is_authenticated:
+            user_posts_html = {'userposts': userposts}
+    return render(request, "paste_list.html", user_posts_html)
