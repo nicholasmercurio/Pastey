@@ -20,7 +20,8 @@ class Paste(models.Model):
     syntax      = models.IntegerField(choices=SYNTAX_CHOICES, default=0)
     poster      = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     public      = models.BooleanField(default=False)
-    timestamp   = models.DateTimeField(default=datetime.datetime.now, blank=True)
+    timestamp       = models.DateTimeField(default=datetime.datetime.now, blank=True)
+    generated_url   = models.CharField(db_index=True, max_length=6, blank=False, default="test")
 
     class Meta:
         ordering = ('-timestamp',)

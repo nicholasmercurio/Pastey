@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-s
+
 {% block content %}
 <h1>Your user is {{ request.user }}</h1>
 <div class="submit_form">
@@ -9,6 +9,9 @@ s
   <input type="submit" name="submit" value="Paste" id="submit">
 </div>
 <div class="top10">
-  
+  <h1>TOP10</h1>
+  {{ title }}
+  {{ poster }}
+  {{ content }}
 </div>
 {% endblock content %}
