@@ -14,6 +14,7 @@ def home_view(request, *args, **kwargs):
             post.content = form2.cleaned_data.get('content')
             post.title = form2.cleaned_data.get('title')
             post.syntax = form2.cleaned_data.get('syntax')
+            post.public = form2.cleaned_data.get('public')
             form2.save()
     else:
         form2 = PostForm()

@@ -36,6 +36,8 @@ urlpatterns = [
     url(r'^signup/$', views.signup, name='signup'),
     path('paste_list/', paste_list_view, name='paste_list'),
     url(r'^$', home_view),
+#    url("^permalink/(?P<key>[a-f0-9]{8})$",
+#    "view.that.redirects.to.permalink.refersTo"),
 
     path('accounts/', include('django.contrib.auth.urls')),
 ]
