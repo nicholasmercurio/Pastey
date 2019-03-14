@@ -1,29 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
-<!--<h1>Name of post: {{ post.title }}</h1>-->
+
 
 <p>Content of post:</p>
 I AM REDIRECTED
-<!--<p>{{post.content|linebreaks}}</p>-->
-<!--<ul>
-<li>Title: {{ userposts.title }}</li>
-<li>Poster name: {{ userposts.poster }}</li>
-<li>Timestamp: {{ userposts.timestamp }}</li>
-<li>Content: {{ userposts.content }}</li>
-<li>Public: {{ userposts.public }}</li>
-</ul>-->
+
 <h1>Name of post: {{ post.title }}</h1>
 
-<p>Content of post:</p>
 
-<p>{{post.content|linebreaks}}</p>
-<p>{{ poster_name }}
-{{ paste_contents }}
-{{ paste_title }}
-{{ paste_syntax }}
-{{ paste_visible }}</p>
-<!--<form action="/{{post.generated_url}}/delete" method="post">
-    {% csrf_token %}
-    <input type="submit" name="delete" value="Delete" />
-</form>-->
+
+<p>Creator of post:</p> {{ post.poster }}
+<p>Content of post:</p> {{ post.content }}
+<p>Title of post:</p> {{ post.title }}
+{{ post.syntax }}
+{{ post.visible }}
 {% endblock %}

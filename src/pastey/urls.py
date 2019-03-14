@@ -36,7 +36,7 @@ urlpatterns = [
     url(r'^signup/$', views.signup, name='signup'),
     path('paste_list/', paste_list_view, name='paste_list'),
     url(r'^$', home_view),
-    url(r'^(?P<rand_url>\S{6})/$', detail_view, name='details'),
+    #url(r'^(?P<rand_url>\S{6})/$', detail_view, name='details'),
+    path('detail/<int:pk>/', detail_view, name='detail'),
     path('accounts/', include('django.contrib.auth.urls')),
-    #url(r'^(?P<rand_url>\S{10})/$', views.show, name='show'),
 ]

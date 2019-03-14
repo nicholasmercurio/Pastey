@@ -16,6 +16,7 @@ class PostForm(forms.ModelForm):
     title       = forms.CharField(max_length=30)
     syntax      = forms.ChoiceField(choices=SYNTAX_CHOICES, widget=forms.Select(), required=True)
     public      = forms.BooleanField(required=False)
+    #generated_url = forms.CharField(max_length=6)
 
     class Meta:
         model       = Paste
