@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<p>Content of post:</p>
+I AM REDIRECTED
+
+<h1>Name of post: {{ post.title }}</h1>
+
+
+
+<p>Creator of post:</p> {{ post.poster }}
+<p>Content of post:</p> {{ post.content }}
+<p>Title of post:</p> {{ post.title }}
+<a href="{% url 'edit_paste' post.generated_url %}" class="btn">Edit</a>
+{% endblock %}

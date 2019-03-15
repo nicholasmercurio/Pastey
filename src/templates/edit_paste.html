@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<p>Content of post:</p>
+I AM REDIRECTED
+
+<h1>Name of post: {{ post.title }}</h1>
+
+<form action="" method="POST">
+  {% csrf_token %}
+  {{ form2.as_p }}<br>
+  <input type="submit" name="submit" value="Paste" id="submit" class="btn btn-primary">
+</form>
+
+<a href="{% url 'detail' post.generated_url %}" class="btn-default">Cancel</a>
+{% endblock %}
