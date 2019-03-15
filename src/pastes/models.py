@@ -22,7 +22,7 @@ class Paste(models.Model):
     poster      = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     public      = models.BooleanField(default=False)
     timestamp       = models.DateTimeField(default=datetime.datetime.now, blank=True)
-    generated_url   = models.CharField(db_index=True, max_length=6, blank=False, default=get_random_string(6).lower())
+    generated_url   = models.CharField(unique=True, max_length=6, blank=False, default=get_random_string(6).lower())
 
     class Meta:
         ordering = ('-timestamp',)
@@ -30,13 +30,3 @@ class Paste(models.Model):
     def __unicode__(self):
         return "%s (%s)" % (self.title or "#%s" % self.id,
             self.get_syntax_display())
-
-#class PermaLink(models.Model):
-#    key = models.CharField(primary_key = True, max_length = 8)
-#    refersTo = models.ForeignKey(MyContentModel, unique = True)
-
-class PasteAdmin(admin.ModelAdmin):
-    list_display = ('__unicode__', 'title', 'poster', 'syntax', 'timestamp', 'public')
-    list_filter = ('timestamp', 'syntax')
-
-admin.site.register(Paste, PasteAdmin)

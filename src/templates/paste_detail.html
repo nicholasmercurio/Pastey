@@ -12,6 +12,5 @@ I AM REDIRECTED
 <p>Creator of post:</p> {{ post.poster }}
 <p>Content of post:</p> {{ post.content }}
 <p>Title of post:</p> {{ post.title }}
-{{ post.syntax }}
-{{ post.visible }}
+<a href="{% url 'edit_paste' post.generated_url %}" class="btn">Edit</a>
 {% endblock %}

@@ -1,17 +1,22 @@
 {% extends "base.html" %}
 
-<!-- this looks like shit -->
-
 {% block content %}
   <h2>Recently Pasted for {{ request.user }}</h2>
-  <ul>
-    {% for x in userposts %}
-    <li>Title: {{ x.title }}</li>
-    <li>Poster name: {{ x.poster }}</li>
-    <li>Timestamp: {{ x.timestamp }}</li>
-    <li>Content: {{ x.content }}</li>
-    <li>Public: {{ x.public }}</li>
-    <br><br>
-    {% endfor %}
-  </ul>
+  <form method="POST">
+  {% csrf_token %}
+    <table class="table">
+
+      {% for x in userposts %}
+        <tr>
+          <td><input type=checkbox name="id[]" value="{{x.id}}"></td>
+          <td><a href="{% url 'detail' x.generated_url %}">{{ x.title }}</a></td>
+          <td>Poster name: {{ x.poster }}</td>
+          <td>Timestamp: {{ x.timestamp }}</td>
+          <td>Content: {{ x.content }}</td>
+          <td>Public: {{ x.public }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+      <input type=submit name="delete" value="delete" class="btn btn-danger">
+  </form>
 {% endblock %}

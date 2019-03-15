@@ -23,9 +23,8 @@ from django.views.generic.edit import CreateView
 from pastes.models import Paste
 from django.conf.urls import url
 from pastes import views
-from pages.views import home_view, contact_view, about_view, paste_list_view, detail_view
+from pages.views import home_view, edit_view, contact_view, about_view, paste_list_view, detail_view
 
-display_info = {'queryset': Paste.objects.all()}
 create_info = {'model': Paste}
 
 urlpatterns = [
@@ -37,6 +36,7 @@ urlpatterns = [
     path('paste_list/', paste_list_view, name='paste_list'),
     url(r'^$', home_view),
     #url(r'^(?P<rand_url>\S{6})/$', detail_view, name='details'),
-    path('detail/<int:pk>/', detail_view, name='detail'),
+    path('<str:custom_uuid>/edit', edit_view, name='edit_paste'),
+    path('<str:custom_uuid>/', detail_view, name='detail'),
     path('accounts/', include('django.contrib.auth.urls')),
 ]

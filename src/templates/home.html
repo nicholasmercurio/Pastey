@@ -1,12 +1,43 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 <h1>Your user is {{ request.user }}</h1>
-<div class="submit_form">
-<form action="" method="POST">
-  {% csrf_token %}
-  {{ form2.as_p }}<br>
-  <input type="submit" name="submit" value="Paste" id="submit">
-</div>
 
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <!--comment how to check authentication in a template-->
+
+        {% if request.user.is_authenticated %}
+      <form action="" method="POST">
+      {% csrf_token %}
+      {{ form2.as_p }}<br>
+      <input type="submit" name="submit" value="Paste" id="submit" class="btn btn-primary">
+      </form>
+        {% endif %}
+    </div>
+    <div class="col-md-6">
+      <ul class="responsive-table">
+        <li class="table-header">
+          <div class="col col-md-1">Paster Name</div>
+          <div class="col col-md-1">Paste Title</div>
+          <div class="col col-md-1">Paste Content</div>
+          <div class="col col-md-1">Paste Timestamp</div>
+        </li>
+        {% for paste in pastes %}
+        <li class="table-row">
+          <div class="col col-md-1" data-label="Paster Name">{{ paste.poster }}</div>
+          <div class="col col-md-1" data-label="Paster Title">{{ paste.title }}</div>
+          <div class="col col-md-1" data-label="Paste Content">{{ paste.content }}</div>
+          <div class="col col-md-1" data-label="Paste Timestamp">{{ paste.timestamp }}</div>
+        </li>
+        {% empty %}
+        <p>No results</p>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
 {% endblock content %}

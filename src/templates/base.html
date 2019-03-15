@@ -1,49 +1,11 @@
 <!doctype html>
+<html lang="en">
 <html>
 <head>
   <title>Pastey! A Pastebin Clone!</title>
-<style>
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.submit_form {
-  float: left;
-  width: 150px;
-}
-
-.top10{
-  float: left;
-  width: 150px;
-}
-
-.topnav {
-  overflow: hidden;
-  background-color: #333;
-}
-
-.topnav a {
-  float: left;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-}
-
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-.topnav a.active {
-  background-color: #4CAF50;
-  color: white;
-}
-</style>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/style.css">
 </head>
-<body>
 
   <div class="topnav">
     <a class="active" href="{% url 'home' %}">Home</a>
@@ -52,7 +14,12 @@ body {
     <a href="{% url 'signup' %}">Signup</a>
     <a href="{% url 'login' %}">Login</a>
     <a href="{% url 'logout' %}">Logout</a>
-
+    <div class="col-md-2">
+      <form action="/">
+        <input type="text" name="q">
+        <input type="submit" name="submit" value="search">
+      </form>
+    </div>
   </div>
 
   <div style="padding-left:16px">
