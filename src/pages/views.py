@@ -7,28 +7,18 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required, user_passes_test
 import uuid
 
-#def is_admin(user):
-
-
-#@login_required
-#@user_passes_test( lambda user:  user.is_authenticated and not user.is_staff)
-# Create your views here.
 def home_view(request, *args, **kwargs):
-    if request.method == 'POST' and request.user.is_authenticated and not user.is_staff:
+    if request.method == 'POST' and request.user.is_authenticated and not request.user.is_staff:
         form2 = PostForm(request.POST)
         if form2.is_valid():
             post = form2.save(commit=False)
             post.poster = request.user
-
-
             rand = str(uuid.uuid4())[:6]
             while Paste.objects.filter(generated_url=rand).exists():
                 rand = str(uuid.uuid4())[:6]
             post.generated_url = rand
-
             post.save()
             return HttpResponseRedirect(reverse('detail', args=(post.generated_url,)))
-
     else:
         form2 = PostForm()
     q = request.GET.get("q")
@@ -42,7 +32,7 @@ def contact_view(request, *args, **kwargs):
     return render(request, "contact.html", {})
 
 def about_view(request, *args, **kwargs):
-    return render(request, "about.html", my_context)
+    return render(request, "about.html", {})
 
 def login_view(request, *args, **kwargs):
     return render(request, "login.html", {})
@@ -53,19 +43,15 @@ def detail_view(request, custom_uuid):
 
 def edit_view(request, custom_uuid):
     post = get_object_or_404(Paste, generated_url=custom_uuid)
-
     if request.method == 'POST' and request.user.is_authenticated:
         form2 = PostForm(request.POST)
         if form2.is_valid():
             post = form2.save(commit=False)
             post.poster = request.user
-
-
             rand = str(uuid.uuid4())[:6]
             while Paste.objects.filter(generated_url=rand).exists():
                 rand = str(uuid.uuid4())[:6]
             post.generated_url = rand
-
             post.save()
             return HttpResponseRedirect(reverse('detail', args=(post.generated_url,)))
     else:
@@ -79,7 +65,6 @@ def paste_list_view(request, *args, **kwargs):
         return redirect(reverse("paste_list"))
     else:
         userposts = Paste.objects.filter(poster=request.user.id)
-
         if request.user.is_authenticated:
                 user_posts_html = {'userposts': userposts}
         return render(request, "paste_list.html", user_posts_html)
