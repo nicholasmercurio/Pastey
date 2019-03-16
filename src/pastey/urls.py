@@ -23,20 +23,20 @@ from django.views.generic.edit import CreateView
 from pastes.models import Paste
 from django.conf.urls import url
 from pastes import views
-from pages.views import home_view, edit_view, contact_view, about_view, paste_list_view, detail_view
+from pages.views import home_view, edit_view, paste_list_view, detail_view, delete_user, delete_confirm_view, share_view
 
 create_info = {'model': Paste}
 
 urlpatterns = [
+    url(r'^$', home_view),
     path('home/', home_view, name='home'),
-    path('contact/', contact_view, name='contact'),
     path('admin/', admin.site.urls, name='admin'),
-    path('about/', about_view, name='about'),
+    path('delete/', delete_user, name='delete'),
     url(r'^signup/$', views.signup, name='signup'),
     path('paste_list/', paste_list_view, name='paste_list'),
-    url(r'^$', home_view),
-    #url(r'^(?P<rand_url>\S{6})/$', detail_view, name='details'),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('delete_confirm_view/', delete_confirm_view, name="delete_confirm_view" ),
+    path('<str:custom_uuid>/share', share_view, name='share_paste'),
     path('<str:custom_uuid>/edit', edit_view, name='edit_paste'),
     path('<str:custom_uuid>/', detail_view, name='detail'),
-    path('accounts/', include('django.contrib.auth.urls')),
 ]

@@ -1,16 +1,34 @@
 {% extends "base.html" %}
 {% block content %}
 
-
-<p>Content of post:</p>
-I AM REDIRECTED
-
-<h1>Name of post: {{ post.title }}</h1>
-
-
-
-<p>Creator of post:</p> {{ post.poster }}
-<p>Content of post:</p> {{ post.content }}
-<p>Title of post:</p> {{ post.title }}
-<a href="{% url 'edit_paste' post.generated_url %}" class="btn">Edit</a>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th>Paster Name</th>
+      <th>Paste Title</th>
+      <th>Paste Content</th>
+      <th>Paste Timestamp</th>
+    </tr>
+  </thead>
+  <tr>
+      <td>{{ post.poster }}</td>
+      <td>{{ post.title}}</td>
+      <td>{{ post.content }}</td>
+      <td>{{ post.timestamp }}</td>
+  </tr>
+</table>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th>Shared with:</th>
+    </tr>
+  </thead>
+  <tr>
+    {% for share in post.shares.all %}
+    <td>{{ share }}</td>
+    {% endfor %}
+  </tr>
+</table>
+<a href="{% url 'edit_paste' post.generated_url %}" class="btn btn-primary btn-large">Edit</a>
+<a href="{% url 'share_paste' post.generated_url %}" class="btn btn-primary btn-large">Share</a>
 {% endblock %}
